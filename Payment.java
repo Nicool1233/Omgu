@@ -1,4 +1,4 @@
-package com.company;
+import java.util.Objects;
 
 public class Payment {
     private String fio;
@@ -93,11 +93,28 @@ public class Payment {
     public void setYear(int year) {
         this.year = year;
     }
-    public boolean equals(Payment object)
-    {
-        if(Double.compare(sumPayment, object.getSumPayment()) == 0)
-            return true; else
-                return false;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Payment payment = (Payment) o;
+        return day == payment.day && month == payment.month && year == payment.year && Double.compare(payment.sumPayment, sumPayment) == 0 && Objects.equals(fio, payment.fio);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(fio, day, month, year, sumPayment);
+    }
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "fio='" + fio + '\'' +
+                ", day=" + day +
+                ", month=" + month +
+                ", year=" + year +
+                ", sumPayment=" + sumPayment +
+                '}';
+    }
 }
